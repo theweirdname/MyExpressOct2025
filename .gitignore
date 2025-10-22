@@ -1,0 +1,9 @@
+# 1. Create a .gitignore file
+echo node_modules/ > .gitignore
+
+# 2. Remove node_modules from git tracking
+git rm -r --cached node_modules
+
+# 3. Add everything again properly
+git add .
+git commit -m "Removed node_modules and added .gitignore"
