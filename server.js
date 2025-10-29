@@ -52,7 +52,13 @@ app.get('/posting/:id', (req,res)=>{
 const contactRoutes = require( './routes/contact/contact_route' );
 app.use( '/contacts', contactRoutes );
 
+const studentRoutes = require ('./routes/students/student_route');
+app.use('/students', studentRoutes);
 
+const apiRoutes = require ('./routes/api/studentapi_routes');
+app.use('/api/students', apiRoutes);
 
+const authRoutes = require ('./routes/api/authapi_routes');
+app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

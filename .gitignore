@@ -1,6 +1,13 @@
 # 1. Create a .gitignore file
 echo node_modules/ > .gitignore
 
+# Environment variables
+.env
+
+# Logs and temp files
+*.log
+.DS_Store
+
 # 2. Remove node_modules from git tracking
 git rm -r --cached node_modules
 

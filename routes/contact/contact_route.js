@@ -17,7 +17,6 @@ router.get('/', (req,res) => {
 });
 
 // Render Form Page
-// Render Form Page
 function renderFormPage( res, error = null, contact = null ) {
   const isUpdate = !!contact;
   res.render( 'contact/contact_form', {
@@ -47,10 +46,10 @@ router.post('/add', (req,res) => {
 
 // Contact Details
 router.get( '/:id', (req, res) => {
-  const contact = contacts.find( c => c.id == req.params.id );
+  const contact = contacts.find( c => c.id == req.params.id ); //c here is contact. it will loop and find all the contact if not null
 
   if ( !contact ) {
-    return res.status( 404 ).send( 'Contact not found' );
+    return res.status( 404 ).send( 'Contact not found' ); // if null it will return this
   }
 
   res.render( 'contact/contact_detail', {
