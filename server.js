@@ -2,6 +2,16 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const cors = require('cors'); // add this
+const corsOptions = { // also this
+  origin: ['http://localhost:4200', 'https://yourfrontenddomain.com'], // Allowed origins. Kena sama dengan frontend
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed HTTP methods
+  credentials: true, // Allow sending cookies/authorization headers
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed request headers
+};
+app.use(cors(corsOptions));
+
 app.engine( 'ejs', require( 'ejs' ).__express);
 app.set( 'view engine', 'ejs' );
 app.set( 'views', path.join( __dirname, 'views' ));
@@ -62,3 +72,5 @@ const authRoutes = require ('./routes/api/authapi_routes');
 app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+
