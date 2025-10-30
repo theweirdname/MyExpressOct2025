@@ -47,7 +47,7 @@ router.post('/add', verifyToken, async (req, res) =>{
     const data = {...req.body, ...req.query};
     const {name, student_no, email, phone} = data;
     var errors = [];
-    if(!name || name.trim() == '') errors.push('name cannot be empty');
+    if(!name || name.trim() === '') errors.push('name cannot be empty');
 
     if(!student_no || !/^\d+$/.test(student_no)) {
         errors.push('Student no is required and must be in number format');

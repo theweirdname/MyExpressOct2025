@@ -43,8 +43,8 @@ router.get('/update/:id', async (req,res)=>{
 });
 
 //TODO: check lecturer git, this is so that there will be no redundancy
-function runValidation (name, student_no, email, Phone){
-    if(!name || name.trim() == '') return renderFormPage(res, 'Name cannot be empty', );
+function runValidation (res, name, student_no, email, Phone){
+    if(!name || name.trim() === '') return renderFormPage(res, 'Name cannot be empty', );
     //student number must be a number
 
     if(!student_no || !/^\d+$/.test(student_no)) {
