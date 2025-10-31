@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 
 const cors = require('cors'); // add this
 const corsOptions = { // also this
-  origin: ['http://localhost:4200', 'https://myexpressoct2025-production-8e0b.up.railway.app','https://mymahirangular2025.web.app/'], // Allowed origins. Kena sama dengan frontend
+  origin: ['http://localhost:4200', 'https://myexpressoct2025-production-8e0b.up.railway.app','https://mymahirangular2025.web.app'], // Allowed origins. Kena sama dengan frontend
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed HTTP methods
   credentials: true, // Allow sending cookies/authorization headers
   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed request headers
