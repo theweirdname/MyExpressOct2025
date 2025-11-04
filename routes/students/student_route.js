@@ -42,7 +42,23 @@ router.get('/update/:id', async (req,res)=>{
     }
 });
 
-//TODO: check lecturer git, this is so that there will be no redundancy
+// View Student Details
+router.get('/:id', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [req.params.id]);
+        if (rows.length === 0) {
+            return res.status(404).send('Student not found');
+        }
+        const student = rows[0];
+        // For now, we will re-use the student_form view to display the details.
+        // A dedicated view (e.g., student_detail.ejs) would be better.
+        renderFormPage(res, null, student);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('DB query failed, please check your DB');
+    }
+});
+
 function runValidation (res, name, student_no, email, Phone){
     if(!name || name.trim() === '') return renderFormPage(res, 'Name cannot be empty', );
     //student number must be a number
@@ -58,7 +74,6 @@ function runValidation (res, name, student_no, email, Phone){
     }
 }
 
-//TODO: Fix Update when you are back at home
 //Update Student information
 router.post('/update/:id', async (req, res) => {
   const { name, student_no, email, Phone } = req.body;
@@ -95,5 +110,20 @@ router.post( '/add', async (req, res) => {
         renderFormPage(res, 'DATABASE ERROR. PLEASE CHECK AT THE DB LOG.');
     }
 });
+
+// Handle Delete Student
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const [result] = await db.query('DELETE FROM users WHERE id = ?', [req.params.id]);
+        if (result.affectedRows === 0) {
+            return res.status(404).send('Student not found');
+        }
+        res.redirect('/students');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error. Failed to delete student.');
+    }
+});
+
 
 module.exports = router;
